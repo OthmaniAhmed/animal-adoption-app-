@@ -1,0 +1,10 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+.no-effect{
+  text-decoration: none;
+  color : white ;
+}
+.example-tooltip-red {
+  background: #b71c1c;
+}

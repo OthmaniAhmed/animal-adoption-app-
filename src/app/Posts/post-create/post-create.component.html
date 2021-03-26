@@ -1,0 +1,24 @@
+<div class="center">
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+
+  <form class="example-form" (ngSubmit)="onSavePost(postForm)" #postForm="ngForm" class="center" *ngIf="!isLoading">
+    <mat-form-field class="example-full-width">
+      <mat-label>User name</mat-label>
+      <input matInput placeholder="Ex. Ahmed"  name="title" [ngModel]="post?.title" required #title="ngModel" >
+      <mat-error *ngIf="title.invalid">Please enter Post name</mat-error>
+    </mat-form-field>
+  
+    <mat-form-field class="example-full-width">
+      <mat-label>Post content</mat-label>
+      <textarea matInput placeholder=""  name="content" [ngModel]="post?.content" rows="4" #content="ngModel"  required></textarea>
+      <mat-error *ngIf="content.invalid">Please enter Post content</mat-error>
+    </mat-form-field>
+    <button mat-fab color="warn" type="button"  matTooltip="Add photo" (click)="filePicker.click()">
+      <span class="material-icons">
+      add
+      </span>
+    </button><input type="file" #filePicker><br><br>
+    <button mat-raised-button color="primary" type="submit" >Save Post</button>
+  </form>
+ 
+</div>

@@ -1,0 +1,16 @@
+.example-card {
+    max-width: 400px;
+  }
+  
+.example-header-image {
+    background-image: url("https://img.icons8.com/pastel-glyph/64/000000/person-male--v2.png");
+    background-size: cover;
+  }
+mat-card{
+  margin :auto ;
+  width: 60%;
+  margin: 1rem auto;
+}
+.message-center{
+  text-align: center;
+}
