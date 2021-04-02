@@ -1,5 +1,6 @@
 const express = require("express");
-const multer = require('multer')
+const multer = require('multer');
+const { count } = require("../models/post");
 
 const Post = require('../models/post');
 
@@ -53,12 +54,24 @@ router.post("/", multer({storage : storage}).single("image") ,(req, res) => {
 
 
 
-router.get('/',(rep, res, next) =>{
-   Post.find().then(document =>{
-    res.status(200).json({
-        message:'post fetched',
-        posts:document });
-    
+router.get('/',(req, res, next) =>{
+    const pageSize = +req.query.pagesize;
+    const currentPage = +req.query.page;
+    const postQuery = Post.find();
+    let fetchedPosts ;
+   if(pageSize && currentPage){
+       postQuery.skip(pageSize * (currentPage - 1)).limit(pageSize);
+   } 
+   postQuery.find().then(document =>{
+       fetchedPosts = document;
+    return Post.count();
+    }).then(count => {
+        res.status(200).json({
+            message:'post fetched',
+            posts: fetchedPosts,
+            maxPosts : count 
+        });
+        
     });
 });
 
