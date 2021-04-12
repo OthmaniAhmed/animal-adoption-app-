@@ -19,6 +19,6 @@
  
   </mat-card>
 </div>
-<p *ngIf="posts.length <= 0" class="message-center">No post added yet !!</p>
+<p *ngIf="posts.length <= 0" class="message-center">No Post Added Come Back Later</p>
 <mat-paginator [length]="totalPosts" [pageSize]="postsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangePage($event)"></mat-paginator>
 </div>

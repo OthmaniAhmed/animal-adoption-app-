@@ -3,7 +3,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 
 import { Post } from '../post.model';
-import { PostsService } from '../posts.servise';
+import { PostsService } from '../posts.service';
 
 @Component({
   selector: 'app-post-list',

@@ -1,0 +1,30 @@
+mat-form-field{
+    width: 100%;
+}
+
+.center {
+    margin: auto;
+    width: 30%;
+    padding-top: 100px;
+}
+.material-icons{
+    font-size: 20px ;
+    vertical-align: middle;
+}
+.center_p{
+    text-align: center;
+    font-size: 16px;
+   
+}
+.center_button{
+   display: block;
+   margin: auto ;
+}
+a{
+    font-weight: bold;
+    color:rgb(187, 64, 15);
+}
+h1{
+    text-align: center;
+    font-family:Verdana, Geneva, Tahoma, sans-serif ;
+}

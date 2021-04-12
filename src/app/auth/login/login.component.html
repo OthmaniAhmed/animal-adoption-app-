@@ -1,0 +1,19 @@
+<div class="center">
+<mat-card class="example-card">
+  <h1>Login</h1>
+<form class="example-form" (submit)="onLogin(loginForm)" #loginForm="ngForm" >
+  <mat-form-field >
+    <input matInput type="email" name="email" ngModel placeholder="E-mail" #emailInput="ngModel" required email>
+    <mat-error *ngIf="emailInput.invalid">Please enter a valid email ! </mat-error>
+    <mat-icon matSuffix>email</mat-icon>
+  </mat-form-field>
+  <mat-form-field >
+    <input matInput type="password" name="password" ngModel placeholder="Password" #passwordInput="ngModel" required >
+    <mat-error *ngIf="passwordInput.invalid">Please enter a password !</mat-error>
+    <mat-icon matSuffix>lock</mat-icon>
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit" class="center_button">Login</button><br>
+  <div class="center_p"><p>Do not have an account ? <a routerLink="/signup" >Sing up</a></p></div>
+</form>
+</mat-card>
+</div>

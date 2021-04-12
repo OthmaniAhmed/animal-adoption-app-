@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from "@angular/common/http" ;
+import { ReactiveFormsModule,FormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http" ;
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +18,10 @@ import { HomeComponent } from './home/home.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import {MatSelectModule} from '@angular/material/select';
+import { AuthInterceptor } from './auth/auth-interceptor';
 
 
 
@@ -30,7 +34,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     PostCreateComponent,
     HeaderComponent,
     PostListComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -45,10 +51,12 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatTooltipModule,
     HttpClientModule,
     MatPaginatorModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    FormsModule,
+    MatSelectModule
 
   ],
-  providers: [],
+  providers: [{provide : HTTP_INTERCEPTORS, useClass : AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -54,13 +54,11 @@ export class PostsService{
 
     getPostUpdateListener(){
         return this.postsUpdated.asObservable();
-    } 
+    }; 
 
 
     deletePost(postId : string){
-       return this.http.delete("http://localhost:3000/api/post/" + postId);
-
-        
+       return this.http.delete("http://localhost:3000/api/post/" + postId); 
     };
 
 
@@ -86,5 +84,5 @@ export class PostsService{
         .subscribe(response => {
             this.router.navigate(["/pets"]);
         });
-    }
+    };
 }
