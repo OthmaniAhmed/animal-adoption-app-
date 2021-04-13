@@ -55,6 +55,7 @@ logout(){
     this.isAuthenticated = false;
     this.authStatusListener.next(false);
     this.router.navigate(['/']) ;
+    this.clearAuthData();
     clearTimeout(this.tokenTimer);
 }
 
@@ -77,10 +78,10 @@ private saveAuthData(token : string, expiratuinData : Data){
     localStorage.setItem('token', token);
     localStorage.setItem('expiration', expiratuinData.toISOString());
 }
-private clearAuthData(){
+private clearAuthData() {
     localStorage.removeItem("token");
     localStorage.removeItem("expiration");
-} 
+  } 
 
 private getAuthData(){
     const token = localStorage.getItem("token");
