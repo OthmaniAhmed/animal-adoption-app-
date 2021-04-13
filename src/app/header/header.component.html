@@ -4,10 +4,19 @@
     <a mat-button routerLink="/pets">Find a Pet</a>
     <a mat-button >Pet Supplies</a>
     <div class="example-spacer"></div>
+
+    <div *ngIf="userIsAuthenticated">
     <a mat-button routerLink="/create"  matTooltip="Add Post" matTooltipClass="example-tooltip-red" ><mat-icon>post_add</mat-icon></a>
-    <a routerLink="/login"><button mat-raised-button color="basic" >
-      login <mat-icon >login</mat-icon>
-    </button></a>
-    
+    </div>
+
+    <div *ngIf="!userIsAuthenticated">
+    <a routerLink="/login"><button mat-raised-button color="basic" >login <mat-icon >login</mat-icon></button></a>
+    </div>
+
+    <div *ngIf="userIsAuthenticated">
+    <button mat-raised-button color="basic" (click)="onlogout()">Logout <mat-icon >logout</mat-icon></button>
+  </div>
+
+
 </mat-toolbar>
 
