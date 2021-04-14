@@ -24,7 +24,8 @@ export class PostsService{
                     title : post.title,
                     content : post.content,
                     id : post._id,
-                    imagePath : post.imagePath
+                    imagePath : post.imagePath,
+                    creator : post.creator
                     };
 
             }), maxPosts : postData.maxPosts
@@ -32,6 +33,7 @@ export class PostsService{
             };
         }))
         .subscribe((transformedPostData)=> {
+            console.log(transformedPostData)
             this.posts = transformedPostData.posts ;
             this.postsUpdated.next({ posts: [...this.posts], postCount: transformedPostData.maxPosts });
         });
@@ -63,7 +65,7 @@ export class PostsService{
 
 
     getPost(id : string){
-        return this.http.get<{_id: string, title: string,content : string,imagePath : string}>("http://localhost:3000/api/post/" + id) ;
+        return this.http.get<{_id: string, title: string,content : string,imagePath : string,creator : string}>("http://localhost:3000/api/post/" + id) ;
     };
 
     
@@ -77,7 +79,7 @@ export class PostsService{
             postData.append("content", content);
             postData.append("image", image, title);
        }else{ // i have string as image then i want to send normal json
-            postData  = { id: id , title: title , content: content, imagePath: image};
+            postData  = { id: id , title: title , content: content, imagePath: image,creator : null};
 
        }
         this.http.put("http://localhost:3000/api/post/" + id , postData  )

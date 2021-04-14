@@ -22,6 +22,7 @@ export class PostCreateComponent implements OnInit {
   form : FormGroup ;
   imagePreview : string ;
 
+
   constructor(public postServise: PostsService,public route:ActivatedRoute) { }
 
 
@@ -39,11 +40,12 @@ export class PostCreateComponent implements OnInit {
               this.isLoading = true;
               this.postServise.getPost(this.postId).subscribe(postData =>{
                 this.isLoading =  false;
-                this.post = {id: postData._id,title: postData.title, content :postData.content,imagePath: postData.imagePath };
+                this.post = {id: postData._id,title: postData.title, content :postData.content,imagePath: postData.imagePath, creator : postData.creator };
               this.form.setValue({
                   title : this.post.title,
                   content : this.post.content,
-                  image : this.post.imagePath
+                  image : this.post.imagePath,
+                 
                 });
               });
               
@@ -77,5 +79,7 @@ export class PostCreateComponent implements OnInit {
       this.postServise.updatePost(this.postId,this.form.value.title, this.form.value.content,this.form.value.image);
     }
    this.form.reset();
+   
   }
+  
 }

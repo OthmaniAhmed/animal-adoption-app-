@@ -15,4 +15,6 @@ app.use('/api/post', postsRouter);
 app.use('/api/user', userRouter);
 app.use("/images",express.static(path.join("backend/images")));
 
+
+
 module.exports = app ;

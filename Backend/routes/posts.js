@@ -39,7 +39,8 @@ router.post("/",checkAuth, multer({storage : storage}).single("image") ,(req, re
     var post = new Post({
         title : req.body.title,
         content : req.body.content,
-        imagePath : url + "/images/" + req.file.filename
+        imagePath : url + "/images/" + req.file.filename,
+        creator : req.userData.userId
     });
     post.save().then(createdPost => {
         res.status(201).json({
@@ -48,7 +49,8 @@ router.post("/",checkAuth, multer({storage : storage}).single("image") ,(req, re
               id:  createdPost._id,
               title : createdPost.title,
               content : createdPost.content,
-              imagePath : createdPost.imagePath
+              imagePath : createdPost.imagePath,
+              creator : createdPost.userId
             }
 
         }) ;
@@ -59,10 +61,14 @@ router.post("/",checkAuth, multer({storage : storage}).single("image") ,(req, re
 
 
 
-router.delete("/:id",checkAuth,(rep, res, next)=>{
-    Post.deleteOne({_id: rep.params.id}).then(result => {
-     
+router.delete("/:id",checkAuth,(req, res, next)=>{
+    Post.deleteOne({_id: req.params.id,creator: req.userData.userId}).then(result => {
+        console.log(result)
+        if(result.n > 0){
         res.status(200).json({message:'Post deleted'});
+    }else{
+        res.status(401).json({message:"not authorized"})
+    }
     });
 });
 
@@ -84,8 +90,13 @@ router.put("/:id",checkAuth, multer({storage : storage}).single("image") ,(req,r
         content: req.body.content ,
         imagePath: imagePath
     });
-        Post.updateOne({_id: req.params.id}, post).then(result =>{
-           res.status(200).json({message: 'Update successful!!'})
+        Post.updateOne({_id: req.params.id, creator: req.userData.userId}, post).then(result =>{
+            if (result.nModified > 0){
+                res.status(200).json({message: 'Update successful!!'})   
+            }else{
+                res.status(401).json({message: 'Not authorized!'})
+            }
+           
         })
 });
 
