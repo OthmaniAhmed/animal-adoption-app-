@@ -34,7 +34,7 @@ getisAuth(){
 } 
 login(email: string, password: string ){
     const authData =  {email , password}
-    this.http.post<{token: string, expiresIn : number,userId : string}>("http://localhost:3000/api/user/login", authData)
+    this.http.post<{token: string, expiresIn : number,userId : string,userName:string}>("http://localhost:3000/api/user/login", authData)
     .subscribe(response =>{
        const token = response.token ; 
        this.token = token ;
@@ -42,8 +42,9 @@ login(email: string, password: string ){
        const expiresInduration = response.expiresIn ;
        this.setAuthTimer(expiresInduration);
        this.isAuthenticated = true ;
-       console.log(response);
+      
        this.userId = response.userId;
+       
        this.authStatusListener.next(true);
        this.clearAuthData();
        const now = new Date();
@@ -116,4 +117,3 @@ private setAuthTimer(duration : number){
 }
 
 }
-

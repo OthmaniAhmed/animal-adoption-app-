@@ -3,7 +3,7 @@
       <h1>Sign Up</h1>
     <form class="example-form" (submit)="onsignup(loginForm)" #loginForm="ngForm" >
       <mat-form-field >
-        <input matInput type="text" name="firstName" ngModel placeholder="Your full name" #firstNameInput="ngModel" required >
+        <input matInput type="text" name="name" ngModel placeholder="Your full name" #firstNameInput="ngModel" required >
         <mat-error *ngIf="firstNameInput.invalid">Please enter your full name </mat-error>
         <mat-icon matSuffix>person</mat-icon>
       </mat-form-field>

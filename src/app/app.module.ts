@@ -22,6 +22,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import {MatSelectModule} from '@angular/material/select';
 import { AuthInterceptor } from './auth/auth-interceptor';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 
@@ -53,7 +54,8 @@ import { AuthInterceptor } from './auth/auth-interceptor';
     MatPaginatorModule,
     MatProgressSpinnerModule,
     FormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatExpansionModule
 
   ],
   providers: [{provide : HTTP_INTERCEPTORS, useClass : AuthInterceptor, multi: true}],

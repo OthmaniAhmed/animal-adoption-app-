@@ -28,7 +28,6 @@ export class PostCreateComponent implements OnInit {
 
   ngOnInit() : void{
     this.form = new FormGroup({
-      title : new FormControl(null, {validators : [Validators.required]}),
       content : new FormControl(null, {validators :[Validators.required]}),
       image: new FormControl(null,{validators :[Validators.required], asyncValidators:[mimeType]})
       //asyncValidators is for the img file type
@@ -40,9 +39,16 @@ export class PostCreateComponent implements OnInit {
               this.isLoading = true;
               this.postServise.getPost(this.postId).subscribe(postData =>{
                 this.isLoading =  false;
-                this.post = {id: postData._id,title: postData.title, content :postData.content,imagePath: postData.imagePath, creator : postData.creator };
+                this.post = {id: postData._id,
+                  content :postData.content,
+                  imagePath: postData.imagePath,
+                  creator : postData.creator ,
+                  creatorName : postData. creatorName,
+                  creatorEmail : postData.creator, 
+                  creatorState : postData.creator, 
+                  creatorPhone : postData.creator,
+                };
               this.form.setValue({
-                  title : this.post.title,
                   content : this.post.content,
                   image : this.post.imagePath,
                  
@@ -69,14 +75,17 @@ export class PostCreateComponent implements OnInit {
   
   onSavePost(){
     if (this.form.invalid){
+      console.log("1")
       return
     }
     this.isLoading = true;
     if(this.mode === 'create'){
-      this.postServise.addPost(this.form.value.title, this.form.value.content, this.form.value.image);
+      console.log("2")
+      this.postServise.addPost(this.form.value.content, this.form.value.image);
       
     }else{
-      this.postServise.updatePost(this.postId,this.form.value.title, this.form.value.content,this.form.value.image);
+      
+      this.postServise.updatePost(this.postId, this.form.value.content,this.form.value.image);
     }
    this.form.reset();
    

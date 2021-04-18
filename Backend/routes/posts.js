@@ -37,20 +37,21 @@ const storage = multer.diskStorage({
 router.post("/",checkAuth, multer({storage : storage}).single("image") ,(req, res) => {
     const url = req.protocol + '://' + req.get('host');
     var post = new Post({
-        title : req.body.title,
         content : req.body.content,
         imagePath : url + "/images/" + req.file.filename,
-        creator : req.userData.userId
+        creator : req.userData.userId,
+        creatorName : req.userData.userName ,
+        creatorEmail: req.userData.userEmail,
+        creatorState : req.userData.userState ,
+        creatorPhone : req.userData.userPhone ,
+
     });
     post.save().then(createdPost => {
         res.status(201).json({
             message:'Post Added !!',
             post: {
               id:  createdPost._id,
-              title : createdPost.title,
-              content : createdPost.content,
-              imagePath : createdPost.imagePath,
-              creator : createdPost.userId
+             ...createdPost
             }
 
         }) ;
@@ -63,7 +64,6 @@ router.post("/",checkAuth, multer({storage : storage}).single("image") ,(req, re
 
 router.delete("/:id",checkAuth,(req, res, next)=>{
     Post.deleteOne({_id: req.params.id,creator: req.userData.userId}).then(result => {
-        console.log(result)
         if(result.n > 0){
         res.status(200).json({message:'Post deleted'});
     }else{
@@ -81,12 +81,11 @@ router.put("/:id",checkAuth, multer({storage : storage}).single("image") ,(req,r
    let imagePath = req.body.imagePath;
     if(req.file){
         const url = req.protocol + '://' + req.get('host');
-        imagePath = url + "/images/" + req.file.filename;
+        imagePath = url + "/images/" ;
     };
     
     const post = new Post({
         _id:req.body.id,
-        title: req.body.title ,
         content: req.body.content ,
         imagePath: imagePath
     });

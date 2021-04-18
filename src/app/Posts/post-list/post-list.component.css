@@ -13,4 +13,9 @@ mat-card{
 }
 .message-center{
   text-align: center;
+  margin-top: 25px;
+  font-size: 21px;
+}
+.better{
+  font-weight: bold;
 }

@@ -9,7 +9,7 @@
   }
 .center {
     margin: auto;
-    width: 80%;
+    width: 60%;
     
     padding: 10px;
 }
@@ -27,4 +27,8 @@ input[type="file"]{
 }
 .image-preview img{
   height: 100%;
+}
+.center_button{
+  display: block;
+  margin: auto ;
 }

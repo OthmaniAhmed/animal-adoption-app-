@@ -45,18 +45,29 @@ router.post("/login", (req, res, next) => {
         fetchedUser = user;
        return bcrypt.compare(req.body.password, user.password)
     })
+
     .then(result => {
         if(!result){
             return res.status(401).jason({
                 message : "Auth Failed"
             });
         }
-        const token = jwt.sign({email: fetchedUser.email, userId: fetchedUser._id}, 'i_use_this_to_secure_my_token',
+        const token = jwt.sign(
+        {
+            email: fetchedUser.email, 
+            userId: fetchedUser._id, 
+            userName:fetchedUser.name,
+            userEmail:fetchedUser.email,
+            userState:fetchedUser.state, 
+            userPhone:fetchedUser.phoneNumber 
+        },
+        'i_use_this_to_secure_my_token',
         {expiresIn: '1h'});
         res.status(200).json({
             token : token,
             expiresIn : 3600,
-            userId : fetchedUser._id
+            userId : fetchedUser._id,
+             
         });
     })
     .catch(err =>{

@@ -25,7 +25,12 @@ export class PostsService{
                     content : post.content,
                     id : post._id,
                     imagePath : post.imagePath,
-                    creator : post.creator
+                    creator : post.creator,
+                    creatorName : post.creatorName, 
+                    creatorEmail : post.creatorEmail, 
+                    creatorState : post.creatorState, 
+                    creatorPhone : post.creatorPhone,
+                    
                     };
 
             }), maxPosts : postData.maxPosts
@@ -40,11 +45,11 @@ export class PostsService{
     };
 
 
-    addPost(title: string ,content: string,image : File){
+    addPost(content: string,image : File){
         const postData = new FormData();
-        postData.append("title",title);
+        
         postData.append("content",content);
-        postData.append("image", image, title )
+        postData.append("image", image )
     this.http
         .post<{message : string, post : Post}>('http://localhost:3000/api/post',postData)
         .subscribe((responseData)=>{
@@ -65,21 +70,29 @@ export class PostsService{
 
 
     getPost(id : string){
-        return this.http.get<{_id: string, title: string,content : string,imagePath : string,creator : string}>("http://localhost:3000/api/post/" + id) ;
+        return this.http.get<{_id: string,content : string,imagePath : string,creator : string,
+            creatorName : string,
+            creatorEmail : string, 
+            creatorState : string, 
+            creatorPhone : string,
+        }>("http://localhost:3000/api/post/" + id) ;
     };
 
     
 
-    updatePost(id : string, title: string, content:string, image: File | string){
+    updatePost(id : string, content:string, image: File | string){
       let postData : Post | FormData;
         if(typeof(image) ==='object'){ //object means file 
             postData = new FormData();
             postData.append("id",id);
-            postData.append("title", title);
             postData.append("content", content);
-            postData.append("image", image, title);
+            postData.append("image", image);
        }else{ // i have string as image then i want to send normal json
-            postData  = { id: id , title: title , content: content, imagePath: image,creator : null};
+            postData  = { id: id, content: content, imagePath: image,creator : null ,
+                creatorName : null,
+                creatorEmail : null, 
+                creatorState : null, 
+                creatorPhone : null, };
 
        }
         this.http.put("http://localhost:3000/api/post/" + id , postData  )

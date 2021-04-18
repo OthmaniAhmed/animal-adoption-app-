@@ -3,8 +3,8 @@
 <mat-card class="example-card" *ngFor="let post of posts" >
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>{{post.title}}</mat-card-title>
-      <mat-card-subtitle>Tunis</mat-card-subtitle>
+      <mat-card-title>{{post.creatorName}}</mat-card-title>
+      <mat-card-subtitle>{{post.creatorState}}</mat-card-subtitle>
     </mat-card-header>
     <img mat-card-image [src]="post.imagePath" alt="">
     <mat-card-content>
@@ -12,13 +12,27 @@
        {{post.content}}
       </p>
     </mat-card-content>
+
+
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Contact </mat-panel-title>
+    </mat-expansion-panel-header>
+            <p><label class="better">Email :</label> {{post.creatorEmail}} </p>
+            <p><label class="better">Phone :</label> {{post.creatorPhone}}</p>
+    </mat-expansion-panel>
+
+
+
+
+
+
     <mat-card-actions *ngIf="userIsAuthenticated && userId == post.creator ">
       <a mat-button color="primary" [routerLink]="['/edit', post.id]">Edit</a>
       <button mat-button color="warn" (click)="onDelete(post.id)">Delete</button>
     </mat-card-actions>
- 
   </mat-card>
 </div>
 <p *ngIf="posts.length <= 0" class="message-center">No Post Added Come Back Later</p>
-<mat-paginator [length]="totalPosts" [pageSize]="postsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangePage($event)"></mat-paginator>
+<mat-paginator *ngIf="posts.length > 0" [length]="totalPosts" [pageSize]="postsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangePage($event)"></mat-paginator>
 </div>
