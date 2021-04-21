@@ -17,13 +17,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { HomeComponent } from './home/home.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { AuthInterceptor } from './auth/auth-interceptor';
-import {MatExpansionModule} from '@angular/material/expansion';
-
+import { MatExpansionModule } from '@angular/material/expansion';
+import { ErrorInterceptor } from './error.intercepter'
+import { MatDialogModule}  from '@angular/material/dialog';
+import { ErrorComponent } from './error/error.component';
 
 
 
@@ -37,7 +39,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     PostListComponent,
     HomeComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    ErrorComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -55,10 +58,13 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatProgressSpinnerModule,
     FormsModule,
     MatSelectModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDialogModule
 
   ],
-  providers: [{provide : HTTP_INTERCEPTORS, useClass : AuthInterceptor, multi: true}],
-  bootstrap: [AppComponent]
+  providers: [{provide : HTTP_INTERCEPTORS, useClass : AuthInterceptor, multi: true},
+    {provide : HTTP_INTERCEPTORS, useClass : ErrorInterceptor, multi: true}],
+  bootstrap: [AppComponent],
+  entryComponents:[ErrorComponent]
 })
 export class AppModule { }

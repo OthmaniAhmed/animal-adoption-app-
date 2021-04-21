@@ -26,7 +26,7 @@ router.post("/signup",(req, res, next)=>{
         })
         .catch(err =>{
             res.status(500).json({
-                error : err
+                    message : "This Email is invalid !"
             });
         })
     });
@@ -67,12 +67,12 @@ router.post("/login", (req, res, next) => {
             token : token,
             expiresIn : 3600,
             userId : fetchedUser._id,
-             
+            userName:fetchedUser.name, 
         });
     })
     .catch(err =>{
         return res.status(401).json({
-            message: "Auth failed"
+            message: "Invalid authentication credentials !!"
         });
     })
 });

@@ -13,6 +13,7 @@ export class AuthService{
     private isAuthenticated = false ;
     private tokenTimer : NodeJS.Timer;
     private userId: string;
+    private userName: string;
     constructor(private http: HttpClient, private router: Router){}
 
 getToken(){
@@ -25,12 +26,14 @@ getisAuth(){
         return this.isAuthenticated;
 }
 
- createUser(email: string, password: string,name: string,phoneNumber: string,state: string){
+createUser(email: string, password: string,name: string,phoneNumber: string,state: string){
      const authData : AuthData = {email: email,password: password,name: name,phoneNumber: phoneNumber,state: state}
     this.http.post("http://localhost:3000/api/user/signup", authData )
-    .subscribe(response =>{
-        console.log(response);
+    .subscribe(()=>{
+        this.router.navigate(['/login']) ;
     });
+
+    
 } 
 login(email: string, password: string ){
     const authData =  {email , password}
@@ -44,12 +47,12 @@ login(email: string, password: string ){
        this.isAuthenticated = true ;
       
        this.userId = response.userId;
-       
+       this.userName= response.userName;
        this.authStatusListener.next(true);
        this.clearAuthData();
        const now = new Date();
        const expiratuinData = new Date( now.getTime() + expiresInduration * 1000);
-       this.saveAuthData(token,expiratuinData,this.userId)
+       this.saveAuthData(token,expiratuinData,this.userId,this.userName)
        this.router.navigate(['/']) ;
        }
     });
@@ -83,16 +86,21 @@ autoAuthUser(){
 getUserId(){
     return this.userId;
 }
+getUserName(){
+    return this.userName;
+}
 
-private saveAuthData(token : string, expiratuinData : Data,userId: string){
+private saveAuthData(token : string, expiratuinData : Data,userId: string,userName: string){
     localStorage.setItem('token', token);
     localStorage.setItem('expiration', expiratuinData.toISOString());
     localStorage.setItem("userId",userId);
+    localStorage.setItem("userName",userName);
 }
 private clearAuthData() {
     localStorage.removeItem("token");
     localStorage.removeItem("expiration");
     localStorage.removeItem("userId");
+    localStorage.removeItem("userName");
   } 
 
 private getAuthData(){
