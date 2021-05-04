@@ -7,7 +7,8 @@ const userSchema = mongosse.Schema({
   password :{type: String},
   name : {type: String},
   phoneNumber : {type: String},
-  state : {type: String}
+  state : {type: String},
+  role : {type: String}
 
 });
 

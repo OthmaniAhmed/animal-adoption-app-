@@ -6,13 +6,14 @@ const path = require("path");
 
 const postsRouter = require("./routes/posts");
 const userRouter = require("./routes/user");
-
+const productRouter = require("./routes/product")
 const app = express();
 
 app.use(bodyParser.json());
 
 app.use('/api/post', postsRouter);
 app.use('/api/user', userRouter);
+app.use('/api/product', productRouter);
 app.use("/images",express.static(path.join("backend/images")));
 
 

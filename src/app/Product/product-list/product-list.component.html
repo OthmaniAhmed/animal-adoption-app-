@@ -1,0 +1,90 @@
+<mat-tab-group mat-stretch-tabs >
+  <mat-tab label="Cat">
+    <div class="content">
+      <div fxLayout="row warp" fxLayoutGap="16px grid">
+          <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let prod of cats_producs">
+            <div *ngIf="prod.animalType=='Cat'">
+            <mat-card class="example-card" >
+              <mat-card-header>
+                <mat-card-title>{{prod.name}}</mat-card-title>
+              </mat-card-header>
+              <img mat-card-image src={{prod.imagePath}} alt="Photo of a Shiba Inu">
+              <mat-card-content>
+                <p> {{prod.description}}</p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-button>Add to Cart</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+          </div>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Dog">
+    <div class="content">
+      <div fxLayout="row warp" fxLayoutGap="16px grid">
+          <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let prod of dogs_producs">
+            <div *ngIf="prod.animalType=='Dog'">
+            <mat-card class="example-card" >
+              <mat-card-header>
+                <mat-card-title>{{prod.name}}</mat-card-title>
+              </mat-card-header>
+              <img mat-card-image src={{prod.imagePath}} alt="Photo of a Shiba Inu">
+              <mat-card-content>
+                <p> {{prod.description}}</p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-button>Add to Cart</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+          </div>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Fish">
+    <div class="content">
+      <div fxLayout="row warp" fxLayoutGap="16px grid">
+          <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let prod of fish_producs">
+            <div *ngIf="prod.animalType=='Fish'">
+            <mat-card class="example-card" >
+              <mat-card-header>
+                <mat-card-title>{{prod.name}}</mat-card-title>
+              </mat-card-header>
+              <img mat-card-image src={{prod.imagePath}} alt="Photo of a Shiba Inu">
+              <mat-card-content>
+                <p> {{prod.description}}</p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-button>Add to Cart</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+          </div>
+      </div>
+    </div>  
+  </mat-tab>
+  <mat-tab label="Birds">
+    <div class="content">
+      <div fxLayout="row warp" fxLayoutGap="16px grid">
+          <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let prod of birds_producs">
+            <div *ngIf="prod.animalType=='Fish'">
+            <mat-card class="example-card" >
+              <mat-card-header>
+                <mat-card-title>{{prod.name}}</mat-card-title>
+              </mat-card-header>
+              <img mat-card-image src={{prod.imagePath}} alt="Photo of a Shiba Inu">
+              <mat-card-content>
+                <p> {{prod.description}}</p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-button>Add to Cart</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+          </div>
+      </div>
+    </div> 
+  </mat-tab>
+</mat-tab-group>

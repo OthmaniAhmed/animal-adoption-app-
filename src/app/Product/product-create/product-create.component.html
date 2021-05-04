@@ -1,0 +1,65 @@
+<div class="container">
+    <h1  class="display-3">Create Product</h1><br>
+    <form class="example-form" (submit)="onSubmit(loginForm)" #loginForm="ngForm" >
+
+        <label for="exampleInputEmail1">Product Name</label>
+        <input type="text" class="form-control" name="name" ngModel [(ngModel)]="prodService.selectedProduct.name"  placeholder="Product Name" required><br>
+
+        <label for="exampleInputEmail1">Price</label>
+        <input type="number" class="form-control" name="price" ngModel [(ngModel)]="prodService.selectedProduct.price" placeholder="Price" required><br>
+
+        <label for="exampleInputEmail1">Quantity</label>
+        <input type="number" class="form-control" name="quantity" ngModel [(ngModel)]="prodService.selectedProduct.quantity" placeholder="Quantity" required><br>
+
+        <label for="exampleInputEmail1">Descption</label>
+        <textarea class="form-control" rows="3" name="description" ngModel [(ngModel)]="prodService.selectedProduct.description" required></textarea><br>
+
+        <mat-form-field appearance="fill" style="width: 15%;" matTooltip="Select Your State">
+            <mat-label>Select animal Type</mat-label>
+            <mat-select  name="animalType"  ngModel  [(ngModel)]="prodService.selectedProduct.animalType" required #stateName="ngModel"  #animalType="ngModel">
+              <mat-option *ngFor="let animal of Animals" [value]="animal" >{{animal}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="animalType.invalid">You must make a selection</mat-error>
+          </mat-form-field><br>
+          <div>
+            <button class="btn btn-primary" type="button" (click)="filePicker.click()" >Pick Image</button>
+            <input type="file" name="" style="visibility: hidden;" #filePicker (change)="onImagePicked($event)">
+          </div>
+          <div class="image-Preview" *ngIf="imagePreview !== '' && imagePreview"> 
+            <img [src]="imagePreview" [alt]="" name="image" required>
+          </div>
+
+        <div class="center_mydiv">
+        <button type="button" mat-raised-button class="btn btn-primary" type="submit">Save</button>
+        </div>
+    </form>
+</div>
+<hr>    
+
+<div class="container" >
+  <h1  class="display-3">Product List</h1><br>
+  <table  class="table table-hover" >
+    <tr class="table-active">
+      <th scope="row">Product name</th>
+      <td>Price</td>
+      <td>Quantity</td>
+      <td>Description</td>
+      <td>Animal type</td>
+      <td>Edit</td>
+      <td>Delete</td>
+    </tr>
+    <tr *ngFor="let prod of prodService.products,index as i" [ngClass]="{'table-secondary': i%2!=0 } ">
+        <td>{{prod.name}}</td>
+        <td>{{prod.price}}</td>
+        <td>{{prod.quantity}}</td>
+        <td>{{prod.description}}</td>
+        <td>{{prod.animalType}}</td>
+        <td><a class="action-btn" ><button mat-mini-fab color="primary" (click)="onEdit(prod,prod._id)"><mat-icon>create</mat-icon></button></a></td>
+        <td><a class="action-btn" ><button mat-mini-fab color="warn" (click)="onDelete(prod._id)"><mat-icon>delete</mat-icon></button></a></td>
+        
+    </tr>
+  </table>
+
+  
+
+</div>

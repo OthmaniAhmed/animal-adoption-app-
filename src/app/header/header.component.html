@@ -1,22 +1,60 @@
 <mat-toolbar color="primary" >
-    <span><a routerLink="" class="no-effect" >Lucky Pets</a></span>
+    <span><a routerLink="" class="no-effect" >Lucky <span style="color: rgb(214, 102, 102);">Pets</span></a></span>
     
     <a mat-button routerLink="/pets">Find a Pet</a>
-    <a mat-button >Pet Supplies</a>
+    <a mat-button routerLink="/pet_supplies">Pet Supplies</a>
     <div class="example-spacer"></div>
 
-    <div *ngIf="userIsAuthenticated">
-    <a mat-button routerLink="/create"  matTooltip="Add Post" matTooltipClass="example-tooltip-red" ><mat-icon>post_add</mat-icon></a>
-    </div>
+
 
     <div *ngIf="!userIsAuthenticated">
     <a routerLink="/login"><button mat-raised-button color="basic" >login <mat-icon >login</mat-icon></button></a>
     </div>
 
-    <div *ngIf="userIsAuthenticated">
-    <button mat-raised-button color="basic" (click)="onlogout()">Logout <mat-icon >logout</mat-icon></button>
+    
+  <div *ngIf="userIsAuthenticated && role=='user'">
+    <a mat-button dis>{{ userName }}  </a>
+    <button mat-icon-button [matMenuTriggerFor]="menu"  mat-raised-button aria-label="Example icon-button with a menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>manage_accounts</mat-icon>
+        <span>Manage your Account</span>
+      </button>
+      <button mat-menu-item routerLink="/create">
+        <mat-icon>post_add</mat-icon>
+        <span>Add Post</span>
+      </button>
+      <button mat-menu-item (click)="onlogout()">
+        <mat-icon>logout</mat-icon>
+        <span>logout</span>
+      </button>
+    </mat-menu>
   </div>
+  
 
+
+  <div *ngIf="userIsAuthenticated && role=='admin'">
+    <a mat-button>{{ userName }}  </a>
+    <button mat-icon-button [matMenuTriggerFor]="menu"  mat-raised-button aria-label="Example icon-button with a menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>delete</mat-icon>
+        <span>Delete an Account</span>
+      </button>
+      <button mat-menu-item routerLink="/create_prod">
+        <mat-icon>create</mat-icon>
+        <span>Product management</span>
+      </button>
+      <button mat-menu-item (click)="onlogout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </div>
 
 
 

@@ -1,7 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Data, Router } from "@angular/router";
-import { loadavg } from "node:os";
 import { Subject } from "rxjs";
 import { AuthData } from "./auth-data.model";
 
@@ -14,6 +13,7 @@ export class AuthService{
     private tokenTimer : NodeJS.Timer;
     private userId: string;
     private userName: string;
+    public role : string;
     constructor(private http: HttpClient, private router: Router){}
 
 getToken(){
@@ -37,7 +37,7 @@ createUser(email: string, password: string,name: string,phoneNumber: string,stat
 } 
 login(email: string, password: string ){
     const authData =  {email , password}
-    this.http.post<{token: string, expiresIn : number,userId : string,userName:string}>("http://localhost:3000/api/user/login", authData)
+    this.http.post<{token: string, expiresIn : number,userId : string,userName:string,role:string}>("http://localhost:3000/api/user/login", authData)
     .subscribe(response =>{
        const token = response.token ; 
        this.token = token ;
@@ -45,14 +45,14 @@ login(email: string, password: string ){
        const expiresInduration = response.expiresIn ;
        this.setAuthTimer(expiresInduration);
        this.isAuthenticated = true ;
-      
+       this.role = response.role;
        this.userId = response.userId;
        this.userName= response.userName;
        this.authStatusListener.next(true);
        this.clearAuthData();
        const now = new Date();
        const expiratuinData = new Date( now.getTime() + expiresInduration * 1000);
-       this.saveAuthData(token,expiratuinData,this.userId,this.userName)
+       this.saveAuthData(token,expiratuinData,this.userId,this.userName,this.role)
        this.router.navigate(['/']) ;
        }
     });
@@ -89,18 +89,23 @@ getUserId(){
 getUserName(){
     return this.userName;
 }
+getUserRole(){
+    return this.role;
+}
 
-private saveAuthData(token : string, expiratuinData : Data,userId: string,userName: string){
+private saveAuthData(token : string, expiratuinData : Data,userId: string,userName: string,role:string){
     localStorage.setItem('token', token);
     localStorage.setItem('expiration', expiratuinData.toISOString());
     localStorage.setItem("userId",userId);
     localStorage.setItem("userName",userName);
+    localStorage.setItem("role",role);
 }
 private clearAuthData() {
     localStorage.removeItem("token");
     localStorage.removeItem("expiration");
     localStorage.removeItem("userId");
     localStorage.removeItem("userName");
+    localStorage.removeItem("role");
   } 
 
 private getAuthData(){

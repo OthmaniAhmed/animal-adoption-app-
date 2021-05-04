@@ -1,0 +1,15 @@
+.content{
+  padding: 16px ;
+}
+img{
+  height: 300px;
+  width: 400px;
+  object-fit: cover;
+  background-size: cover;
+  overflow: hidden;
+  max-width: 100%;
+  
+}
+button{
+  color: red;
+}

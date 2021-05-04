@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 
 const User = require('../models/user');
-const user = require("../models/user");
+
 
 const router = express.Router();
 
@@ -15,7 +15,8 @@ router.post("/signup",(req, res, next)=>{
             password : hash,
             name : req.body.name,
             phoneNumber :req.body.phoneNumber,
-            state : req.body.state
+            state : req.body.state,
+            role : "user"
         });
         user.save()
         .then(result =>{
@@ -68,6 +69,7 @@ router.post("/login", (req, res, next) => {
             expiresIn : 3600,
             userId : fetchedUser._id,
             userName:fetchedUser.name, 
+            role:fetchedUser.role
         });
     })
     .catch(err =>{

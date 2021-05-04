@@ -26,7 +26,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { ErrorInterceptor } from './error.intercepter'
 import { MatDialogModule}  from '@angular/material/dialog';
 import { ErrorComponent } from './error/error.component';
-
+import {MatMenuModule} from '@angular/material/menu';
+import { ProductCreateComponent } from './Product/product-create/product-create.component';
+import { ProductListComponent } from './Product/product-list/product-list.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 
@@ -40,7 +44,9 @@ import { ErrorComponent } from './error/error.component';
     HomeComponent,
     LoginComponent,
     SignupComponent,
-    ErrorComponent
+    ErrorComponent,
+    ProductCreateComponent,
+    ProductListComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -59,7 +65,10 @@ import { ErrorComponent } from './error/error.component';
     FormsModule,
     MatSelectModule,
     MatExpansionModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule,
+    MatTabsModule,
+    FlexLayoutModule,
 
   ],
   providers: [{provide : HTTP_INTERCEPTORS, useClass : AuthInterceptor, multi: true},
