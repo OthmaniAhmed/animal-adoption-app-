@@ -129,4 +129,10 @@ private setAuthTimer(duration : number){
 
 }
 
+updateAccount(acc : AuthData,id: string){
+    return this.http.put("http://localhost:3000/api/user/manage" + `/${id}`, acc);
+}
+isAdmin(){
+    return this.isAuthenticated && localStorage.getItem('role')=='admin';
+}
 }

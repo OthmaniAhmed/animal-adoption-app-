@@ -28,3 +28,9 @@ h1{
     text-align: center;
     font-family:Verdana, Geneva, Tahoma, sans-serif ;
 }
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    [class*="center"] {
+      width: 60%;
+    }   
+}

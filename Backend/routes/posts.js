@@ -150,12 +150,21 @@ router.get("/:id",(req, res, next) => {
         }
     }).catch(error => {
         res.status(500).json({
-          message  : "Fetching post failed !"
+          message  : "Fetching post failed   !"
         }) 
     })
 });
 
 
-
+router.delete('/delete/:id',(req, res) => {
+    Post.findByIdAndRemove(req.params.id,(err,doc)=>{
+        if(!err){
+            res.send(doc);
+        }
+        else{
+            console.log('Error in Deleting the Product')
+        }
+    })
+});
 
 module.exports = router ;

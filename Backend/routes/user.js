@@ -78,7 +78,28 @@ router.post("/login", (req, res, next) => {
         });
     })
 });
-
+router.put('/manage/:id',(req, res)=>{
+   
+    bcrypt.hash(req.body.password, 10,function(err, hash) {
+        var user = {
+            name : req.body.name,
+            email: req.body.email,
+            password : hash, 
+            phoneNumber: req.body.phoneNumber,
+            state : req.body.state,
+        }
+        User.findByIdAndUpdate(req.params.id,{ $set: user},{new : true},(err, doc)=>{
+            if(!err){
+                res.send(doc)
+            }
+            else{
+                console.log('Error in User update')
+            }
+    })
+      })
+   
+   
+})
 
 
 module.exports = router ;

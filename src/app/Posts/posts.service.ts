@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class PostsService{
     private posts : Post[]= [];
     private postsUpdated = new Subject<{posts : Post[], postCount : number}>();
-
+    postsDeletePage : Post[];
     constructor(private http:HttpClient, private router: Router){};
 
     getPosts(postPerPage : number, currentPage: number){
@@ -38,7 +38,6 @@ export class PostsService{
             };
         }))
         .subscribe((transformedPostData)=> {
-            console.log(transformedPostData)
             this.posts = transformedPostData.posts ;
             this.postsUpdated.next({ posts: [...this.posts], postCount: transformedPostData.maxPosts });
         });
@@ -100,4 +99,13 @@ export class PostsService{
             this.router.navigate(["/pets"]);
         });
     };
+
+    getAllPostList(){
+        return this.http.get<{message : string , posts : any, maxPosts : number}>('http://localhost:3000/api/post') ;
+      }
+
+    deletePostWithAdmin(id: string){
+        return this.http.delete("http://localhost:3000/api/post/delete"+`/${id}` );
+      }
+
 }

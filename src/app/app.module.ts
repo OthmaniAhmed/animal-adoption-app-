@@ -31,6 +31,9 @@ import { ProductCreateComponent } from './Product/product-create/product-create.
 import { ProductListComponent } from './Product/product-list/product-list.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { PostDeleteComponent } from './Posts/post-delete/post-delete.component';
+import { MatTableModule } from '@angular/material/table';
+import { ManageAccountComponent } from './auth/manage-account/manage-account.component';
 
 
 
@@ -47,6 +50,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ErrorComponent,
     ProductCreateComponent,
     ProductListComponent,
+    PostDeleteComponent,
+    ManageAccountComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -69,6 +74,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatMenuModule,
     MatTabsModule,
     FlexLayoutModule,
+    MatTableModule,
 
   ],
   providers: [{provide : HTTP_INTERCEPTORS, useClass : AuthInterceptor, multi: true},

@@ -1,0 +1,18 @@
+<div *ngFor="let post of postService.postsDeletePage" class="center">
+    <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+        <mat-panel-title>
+            <p style="font-weight: bold;">Created by :</p>{{post.creatorName}}
+        </mat-panel-title>
+        <mat-panel-description>
+            {{post.content}}
+        </mat-panel-description>
+        </mat-expansion-panel-header>
+        <img mat-card-image [src]="post.imagePath" alt=""><br>
+        <button mat-button color="warn" (click)="onDelete(post._id)">Delete</button>
+        </mat-expansion-panel>
+        </mat-accordion>
+</div>
+
+
