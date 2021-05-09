@@ -8,3 +8,18 @@
 .example-tooltip-red {
   background: #b71c1c;
 }
+.header{
+  padding-left:20%;
+  padding-right:20%;
+}
+.title{
+  font-size: 30px;
+  font-family: 'Itim', cursive;
+}
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  [class*="header"] {
+    padding-left:5%;
+    padding-right:5%;
+  }   
+}

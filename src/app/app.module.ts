@@ -34,6 +34,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { PostDeleteComponent } from './Posts/post-delete/post-delete.component';
 import { MatTableModule } from '@angular/material/table';
 import { ManageAccountComponent } from './auth/manage-account/manage-account.component';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
 
@@ -52,6 +53,7 @@ import { ManageAccountComponent } from './auth/manage-account/manage-account.com
     ProductListComponent,
     PostDeleteComponent,
     ManageAccountComponent,
+   
   ],
   imports: [
     ReactiveFormsModule,
@@ -75,6 +77,7 @@ import { ManageAccountComponent } from './auth/manage-account/manage-account.com
     MatTabsModule,
     FlexLayoutModule,
     MatTableModule,
+    MatGridListModule,
 
   ],
   providers: [{provide : HTTP_INTERCEPTORS, useClass : AuthInterceptor, multi: true},

@@ -1,13 +1,14 @@
 .heaher{
-width: 100%; 
-overflow: hidden;
-position: fixed ;
-top: 0;     
-z-index:999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
 
 }
 main {
     
     margin: 1rem auto;
-    padding-top: 4rem;
+    padding-top: 3rem;
 }
+

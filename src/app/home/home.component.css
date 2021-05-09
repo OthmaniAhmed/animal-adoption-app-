@@ -1,10 +1,69 @@
-#fade_in {
-    margin-top: 25px;
-    font-size: 21px;
-    text-align: center;
-    animation: fadein 2s;
+* {
+	margin: 0;
+	padding: 0;
 }
-@keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+body {
+	text-align: center;
 }
+.wrapper {
+	width: 60%;
+	margin: 0 auto;
+}
+.banner-area {
+	width: 100%;
+	height: 500px;
+	position: fixed;
+	background-image: url(../../assets/910274.jpg);
+	-webkit-background-size: cover;
+	background-size:cover;
+	background-position: center center;
+	
+}
+.banner-area h2 {
+	padding-top: 8%;
+	font-size: 70px;
+	font-family: poppins;
+	text-transform: uppercase;
+	color: #fff;
+}
+.banner-area h4 {
+	font-family: poppins;
+	color: #fff;
+}
+.content-area {
+	width: 100%;
+	position: relative;
+	top: 480px;
+	background: #ebebeb;
+	height: 100%;
+	padding-bottom: 10%;
+}
+.content-area h2 {
+	font-family: poppins;
+	letter-spacing: 4px;
+	padding-top: 30px;
+	font-size: 40px;
+	margin: 0;
+}
+.content-area h3 {
+	font-family: freight-sans-pro, sans-serif;;
+	letter-spacing: 4px;
+	padding-top: 30px;
+	font-size: 20px;
+	margin: 0;
+	color:rgb(207, 40, 96);
+}
+.content-area p {
+	padding: 2% 0px;
+	font-family: poppins;
+	line-height: 30px;
+}
+.example-card{
+	margin-right: auto;
+	margin-left: 10%;
+	margin-top: 40px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+	

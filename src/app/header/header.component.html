@@ -1,5 +1,5 @@
-<mat-toolbar color="primary" >
-    <span><a routerLink="" class="no-effect" >Lucky <span style="color: rgb(214, 102, 102);">Pets</span></a></span>
+<mat-toolbar color="primary" class="header">
+    <span class="title"><a routerLink="" class="no-effect" >Lucky <span style="color:palevioletred">Pets</span></a></span>
     
     <a mat-button routerLink="/pets">Find a Pet</a>
     <a mat-button routerLink="/pet_supplies">Pet Supplies</a>
@@ -8,13 +8,13 @@
 
 
     <div *ngIf="!userIsAuthenticated">
-    <a routerLink="/login"><button mat-raised-button color="basic" >login <mat-icon >login</mat-icon></button></a>
+    <a routerLink="/login"><button mat-flat-button color="primary" >login <mat-icon >login</mat-icon></button></a>
     </div>
 
     
   <div *ngIf="userIsAuthenticated && role=='user'">
     <a mat-button dis>{{ userName }}  </a>
-    <button mat-icon-button [matMenuTriggerFor]="menu"  mat-raised-button aria-label="Example icon-button with a menu">
+    <button mat-icon-button [matMenuTriggerFor]="menu" color="primary" mat-flat-button aria-label="Example icon-button with a menu">
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
